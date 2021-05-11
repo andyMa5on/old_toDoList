@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        
+        <meta charset="utf-8">
+        <title>To-Do List</title>
+
+        <link rel="stylesheet" href="todolist.css">
+
+        <script src="todolist.js"></script>
+
+
+    </head>
+
+    <body>
+        
+        <header>
+
+            <h1>To Do List</h1>
+
+        </header>
+
+        <article id="addSection">
+
+            <img id="addIcon" src="Images//plus.png" alt="" onclick="magic()">
+
+            <div class="hidden" id="nList">
+                <input type="text" id="addItem" name="addItem" onfocus="this.value= '' ">
+                <button id="addBttn" onclick="updateList(addItem.value);">Add</button>
+            </div>
+
+        </article>
+
+        <br><br>
+
+        <div id="exDetails" class="hidden">test</div>
+
+        <div id="listSection" onload="currentList();"></div>
+
+        <script>
+
+            const list = [
+                { title: 'item 1', description: 'Add Description here' },
+                { title: 'item 2', description: 'Add Description here' },
+                { title: 'item 3', description: 'Add Description here' },
+                { title: 'item 4', description: 'Add Description here' }
+            ];
+
+            const divEl = document.getElementById('listSection');
+            const ulEl = document.createElement('ul');
+            ulEl.id = 'tdList'
+
+            for ( listEx of list ) {
+
+                const liEl = document.createElement('li');
+
+                const aUp = document.createElement('img');
+                aUp.src = "Images//ArrowUp.png";
+                aUp.setAttribute('id', 'moveUp');
+                aUp.setAttribute('class', 'priorityArrows');
+                aUp.setAttribute('onclick', 'moveFunc(this.id, this.parentElement);');
+                aUp.setAttribute('alt', 'Move Up');
+                liEl.appendChild(aUp);
+
+                const checkbox = document.createElement('input')
+                checkbox.setAttribute('type', 'checkbox')
+                checkbox.setAttribute('onchange', 'checkBox(this.checked);')
+                liEl.appendChild(checkbox)
+
+                const titleText = document.createTextNode(listEx.title);
+                const inputTitle = document.createElement('input')
+                inputTitle.setAttribute('value', '')
+                inputTitle.setAttribute('class', 'titleInput')
+                inputTitle.value = titleText.nodeValue
+                liEl.appendChild(inputTitle);
+
+                const brEl = document.createElement('br');
+                liEl.appendChild(brEl);
+
+                const aDown = document.createElement('img');
+                aDown.src = "Images//ArrowDown.png";
+                aDown.setAttribute('id', 'moveDown');
+                aDown.setAttribute('class', 'priorityArrows pDown');
+                aDown.setAttribute('onclick', 'moveFunc(this.id, this.parentElement);');
+                aDown.setAttribute('alt', 'Move Up');
+                liEl.appendChild(aDown);
+
+                const txtArea = document.createElement('textarea');
+                txtArea.setAttribute('id', 'areaDescrip')
+                txtArea.placeholder = listEx.description;
+                liEl.appendChild(txtArea);
+
+                const remove = document.createElement('button');
+                const binTag = document.createElement('img')
+                binTag.src = "Images/delete_red.png"
+                binTag.style.width = "90%"
+                binTag.style.padding = "0.1em"
+                remove.appendChild(binTag);
+                remove.style.maxWidth = "30px"
+                remove.setAttribute("onclick", "removeLi(this.parentElement);")
+                liEl.appendChild(remove);
+
+                ulEl.appendChild(liEl);
+
+            }
+
+            divEl.appendChild(ulEl);
+
+        </script>
+
+    </body>
+
+</html>

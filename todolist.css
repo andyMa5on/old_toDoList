@@ -1,0 +1,88 @@
+@charset "utf-8";
+/* CSS Document */
+
+header {
+    text-align: center;
+    font-size: larger;
+    font-style: italic;
+}
+
+body {
+    margin: auto;
+    max-width: 1400px;
+}
+
+#exDetails {
+    width: 65%;
+    height: 400px;
+    border: 1px solid #8f8f8f94;
+    border-radius: 5px;
+    box-shadow: 5px 5px #e0e0e0ad;
+    padding: 5px;
+    margin-right: 2em;
+    margin-left: 1.6em;
+    float: right;
+    clear: right;
+    align-content: left;
+}
+
+#listSection {
+    width: 30%;
+    min-width: fit-content;
+    height: fit-content;
+    border: 1px solid #8f8f8f94; 
+    border-radius: 5px;
+    box-shadow: 5px 5px #e0e0e0ad;
+}
+
+li>button {
+    
+    background-color: #ffffff00;
+    border: 0px solid #6d6c6c;
+    border-radius: 5px;
+    vertical-align: 5px;
+}
+
+li {
+    list-style: none;
+    margin: 0em 2em 0.5em 0em ;
+    border: 1px solid #8f8f8f94;
+    padding: 5px;
+}
+
+.titleInput {
+    border: 0px solid;
+    text-transform:capitalize;
+    font-weight: bold;
+    font-size: 1em;
+    width: fit-content;
+    
+}
+
+#areaDescrip {
+    min-width: 210px;
+}
+
+#addIcon {
+    margin-left: 2.3em;
+    margin-right: 1em;
+    width: 23px;
+    float: left;
+}
+.hidden {
+    display: none;
+}
+
+.expand {
+    display: block;
+}
+
+.priorityArrows {
+    width: 20px;
+    margin-right: 5px;
+}
+
+.priorityArrows, .pDown {
+    float:left;
+    vertical-align:middle;
+}
