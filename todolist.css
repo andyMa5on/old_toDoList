@@ -1,88 +1,216 @@
 @charset "utf-8";
 /* CSS Document */
+html{
+    font-family: sans-serif;
+}
+
+#backdrop {
+	position: fixed;
+	width: 100%;
+	height: 100vh;
+	top: 0;
+	left: 0;
+	background: rgba(0, 0, 0, 0.75);
+	z-index: 10;
+	pointer-events: none;
+	display: none;
+}
+
+#backdrop.backdropVisible {
+	display: block;
+	pointer-events: all;
+}
 
 header {
-    text-align: center;
-    font-size: larger;
-    font-style: italic;
+	align-items: center;
+	color: white;
+	background-color: rgb(21, 21, 167);
+	width: 100%;
+    justify-content: space-between;
+    display: flex;
+    padding: 0 2.5rem;
+}
+
+header button {
+    font: inherit;
+    color: white;
+	padding: 0.5rem 1rem;
+    background: rgb(230, 145, 9);
+    border: 1px solid rgb(230, 145, 9);
+    border-radius: 6px;
+    box-shadow: 0px 1px 8px rgba(0, 0, 0, 0.26);
+    cursor: pointer;
+}
+
+header button:hover,
+header button:active {
+    background-color:rgb(253, 180, 63);
+    border-color: rgb(253, 180, 63);
 }
 
 body {
     margin: auto;
-    max-width: 1400px;
+	max-width: 1400px;
 }
 
-#exDetails {
-    width: 65%;
-    height: 400px;
-    border: 1px solid #8f8f8f94;
-    border-radius: 5px;
-    box-shadow: 5px 5px #e0e0e0ad;
-    padding: 5px;
-    margin-right: 2em;
-    margin-left: 1.6em;
-    float: right;
-    clear: right;
-    align-content: left;
+#addItemModule {
+    position: fixed;
+    z-index: 100;
+    background: white;
+    border-radius: 10px;
+    width: 30%;
+    top: 30vh;
+    right: 33%;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
+}
+
+#modalContent {
+    font-size: 1.3em;
+    margin: 1rem 10%;
+}
+
+#modalContent input {
+	margin: 0.5rem 0rem 0.5rem 0rem ;
+	width: 90%;
+}
+
+#modalButtons {
+	padding: 1rem;
+	display: flex;
+	justify-content: flex-end;
+}
+
+#addBttn {
+	color: white;
+	font-size: 1rem;
+	background: rgb(21, 21, 167);
+	margin-left: 1rem;
+	padding: 0.5rem 1rem;
+	border-radius: 6px;
+	border: 1px solid rgb(21, 21, 167);
+	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
+}
+
+#addBttn:hover {
+	background-color: rgb(253, 180, 63) ;
+	border-color: rgb(253, 180, 63);
+}
+
+#closeBttn {
+	color: rgb(21, 21, 167);
+	font-size: 1rem;
+	background: transparent;
+	margin-left: 1rem;
+	padding: 0.5rem 1rem;
+	border-radius: 6px;
+	border: 0px solid rgb(21, 21, 167);
+}
+
+#closeBttn:hover {
+	background:rgba(21, 21, 167, 0.192)
+}
+
+.card {
+	background: white;
+	border-radius: 10px;
+	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
+}
+
+#entry-text {
+	width: 40rem;
+	max-width: 80%;
+	margin: 2rem auto;
+	padding: 0.8rem;
+}
+
+#entry-text p {
+	font-size: 1.5rem;
+	font-weight: bold;
+	text-align: center;
+}
+
+.toDoCard {
+	width: 40rem;
+	max-width: 80%;
+	margin: 1rem auto;
+	padding: 0.8rem;
+	display: table;
+}
+
+.flex {
+	display: flex;
+	justify-content: flex-end;
+}
+Label {
+	font: small-caps;
+    font-weight: bold;
+    margin: 0.5rem 0;
+    color: #444444;
+}
+
+Input {
+    padding: 0.3rem 0.2rem;
 }
 
 #listSection {
-    width: 30%;
-    min-width: fit-content;
-    height: fit-content;
-    border: 1px solid #8f8f8f94; 
-    border-radius: 5px;
-    box-shadow: 5px 5px #e0e0e0ad;
+	width: 30%;
+	min-width: fit-content;
+	height: fit-content;
+	border: 1px solid #8f8f8f94;
+	border-radius: 5px;
+	box-shadow: 5px 5px #e0e0e0ad;
 }
 
-li>button {
-    
-    background-color: #ffffff00;
-    border: 0px solid #6d6c6c;
-    border-radius: 5px;
-    vertical-align: 5px;
+li > button {
+	background-color: #ffffff00;
+	border: 0px solid #6d6c6c;
+	border-radius: 5px;
+	vertical-align: 5px;
 }
 
 li {
-    list-style: none;
-    margin: 0em 2em 0.5em 0em ;
-    border: 1px solid #8f8f8f94;
-    padding: 5px;
+	list-style: none;
+}
+
+.central {
+	margin: 1rem auto;
 }
 
 .titleInput {
-    border: 0px solid;
-    text-transform:capitalize;
-    font-weight: bold;
-    font-size: 1em;
-    width: fit-content;
-    
+	border: 0px solid;
+	text-transform: capitalize;
+	font-weight: bold;
+	font-size: 1em;
+	width: fit-content;
+	outline: none;
 }
 
-#areaDescrip {
-    min-width: 210px;
+.areaDescrip {
+	width: 578px;
+	min-width: 578px;
+	max-width: 578px; 
+	height: 75px;
+	min-height: 75px;
+	max-height: 75px;
 }
 
-#addIcon {
-    margin-left: 2.3em;
-    margin-right: 1em;
-    width: 23px;
-    float: left;
+.binButton {
+	width: 30px;
+
+}
+
+.binImage {
+	width: 90%;
+	padding: 0.2em 0.1em 0.1em;
 }
 .hidden {
-    display: none;
+	display: none;
 }
 
-.expand {
-    display: block;
-}
-
-.priorityArrows {
-    width: 20px;
-    margin-right: 5px;
-}
-
-.priorityArrows, .pDown {
-    float:left;
-    vertical-align:middle;
+.arrow_Up,
+.arrow_Down {
+	width: 20px;
+	margin-right: 5px;
+	float: left;
+	vertical-align: middle;
 }
