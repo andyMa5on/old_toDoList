@@ -11,40 +11,43 @@ const ArrowDown = document.getElementsByName('move_down');
 const toDoList = []
 
 function addToDoListItemHandler() {
+	let id = Date.now()
 	let title = userInput[0].value
 	let description = userInput[1].value
 
 	let newItem = {
+		id: id,
 		title: title,
 		description: description
 	}
 
 	toDoList.push(newItem)
-	createLiElement(newItem.title, newItem.description)
+	createLiElement(newItem.id, newItem.title, newItem.description)
 	userInput[0].value = ''
 	userInput.value = ''
 }
 
-function createLiElement(title, descrition) {
+function createLiElement(id, title, descrition) {
 	const liEl = document.createElement('li')
 	liEl.innerHTML = `
 	<div class='card toDoCard'>
 		<div class='central'>
 			<img src='Images//ArrowUp.png' alt='Up Arrow' name='move_up' class='arrow_Up'>
+			<input type='hidden' id='id' value=${id}>
 			<input type='text'value=${title} class='titleInput' editable>
 			<br>
 			<img src='Images//ArrowDown.png' alt='Down Arrow' name='move_down' class='arrow_Down'>
 			<textarea class='areaDescrip'>${descrition}</textarea>
 		</div>
 		<div class='flex'>
-		<button class='binButton'><img src='Images/delete_red.png' class='binImage' alt='delete item'></button>
+			<button class='binButton'><img src='Images/delete_red.png' class='binImage' alt='delete item'></button>
 		</div>
 	</div>
 	`;
 	
 	liEl.querySelector('.arrow_Up').addEventListener('click', function() {moveFunc(this, this.parentElement)})
 	liEl.querySelector('.arrow_Down').addEventListener('click', function() {moveFunc(this, this.parentElement)})
-	liEl.querySelector('.binButton').addEventListener('click', function() {removeLi(this.parentElement.parentElement.parentElement)})
+	liEl.querySelector('.binButton').addEventListener('click', function() {removeLi(this.parentElement.parentElement.parentElement, this.parentElement.previousElementSibling.children[1].value)})
 	ulElement.appendChild(liEl);
 }
 
@@ -78,10 +81,15 @@ function updateList(newItem) {
 	}
 }
 
-function removeLi(i) {
+function removeLi(i, itemId) {
+	let idx = toDoList.findIndex((item, idx, List) => {
+		return item.id == itemId
+	}) 
+	
 	let el = i;
 	let confirmDeletion = confirm('Are you sure you want to delete this item ? \n \n Click ok to delete.')
 	if (confirmDeletion == true) {
+		toDoList.splice(idx, 1) ;
 		el.remove();
 		updateUI();
 	} else {
