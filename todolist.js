@@ -45,8 +45,8 @@ function createLiElement(id, title, descrition) {
 	</div>
 	`;
 	
-	liEl.querySelector('.arrow_Up').addEventListener('click', function() {moveFunc(this, this.parentElement)})
-	liEl.querySelector('.arrow_Down').addEventListener('click', function() {moveFunc(this, this.parentElement)})
+	liEl.querySelector('.arrow_Up').addEventListener('click', function() {moveFunc(this, this.parentElement, this.nextElementSibling.value)})
+	liEl.querySelector('.arrow_Down').addEventListener('click', function() {moveFunc(this, this.parentElement, this.parentElement.children[1].value)})
 	liEl.querySelector('.binButton').addEventListener('click', function() {removeLi(this.parentElement.parentElement.parentElement, this.parentElement.previousElementSibling.children[1].value)})
 	ulElement.appendChild(liEl);
 }
@@ -81,11 +81,15 @@ function updateList(newItem) {
 	}
 }
 
-function removeLi(i, itemId) {
-	let idx = toDoList.findIndex((item, idx, List) => {
-		return item.id == itemId
-	}) 
-	
+function findArrayIndex(arrayId) {
+	const arrayIndex = toDoList.findIndex((item, idx, list) =>{
+		return item.id == arrayId
+	})
+	return arrayIndex
+}
+
+function removeLi(i, arrayIdx) {
+	let idx = findArrayIndex(arrayId)
 	let el = i;
 	let confirmDeletion = confirm('Are you sure you want to delete this item ? \n \n Click ok to delete.')
 	if (confirmDeletion == true) {
@@ -104,19 +108,24 @@ function addModalHandler() {
 
 }
 
-function moveFunc(element, parent) {
+function moveFunc(element, parent, arrayId) {
 	i = element.getAttribute('name')
 	parent = parent.parentElement.parentElement
-	console.log(parent)
 	if (i == 'move_down') {
+		const arrayIndex = findArrayIndex(arrayId)
+		const item2Move = toDoList[arrayIndex]
+		const swapWith = toDoList[arrayIndex + 1]
+		toDoList[arrayIndex] = swapWith
+		toDoList[arrayIndex + 1] = item2Move
 		let test = parent.nextElementSibling;
-		console.log(test);
-
 		test.insertAdjacentElement('afterend', parent);
 	} else {
+		const arrayIndex = findArrayIndex(arrayId)
+		const item2Move = toDoList[arrayIndex]
+		const swapWith = toDoList[arrayIndex - 1]
+		toDoList[arrayIndex] = swapWith
+		toDoList[arrayIndex - 1] = item2Move
 		let test = parent.previousElementSibling;
-		console.log(test);
-
 		parent.insertAdjacentElement('afterend', test);
 	}
 }
