@@ -1,6 +1,7 @@
 // Javascript
 const backDrop = document.getElementById('backdrop');
 const addItemModule = document.getElementById('addItemModule')
+const AddItemButton = document.getElementById('addIcon')
 const addButton = document.getElementById('addBttn');
 const closeButton = document.getElementById('closeBttn')
 const ulElement = document.getElementById('userInterface');
@@ -9,6 +10,24 @@ const arrowUp = document.getElementsByName('move_up');
 const ArrowDown = document.getElementsByName('move_down');
 
 const toDoList = []
+
+function addModalHandler() {
+	addItemModule.classList.toggle('hidden');
+	toggleBackdrop();
+	userInput[0].focus()
+
+}
+
+function validateInput(newItem) {
+	if (newItem == '') {
+		alert('Please enter a title');
+		document.getElementById('addItem').focus();
+	} else {
+		addToDoListItemHandler()
+		updateUI()
+		addModalHandler(); 
+	}
+}
 
 function addToDoListItemHandler() {
 	let id = Date.now()
@@ -70,17 +89,6 @@ function closeHandler() {
 	userInput[1].value = ''
 }
 
-function updateList(newItem) {
-	if (newItem == '') {
-		alert('Please enter a title');
-		document.getElementById('addItem').focus();
-	} else {
-		addToDoListItemHandler()
-		updateUI()
-		addModalHandler(); 
-	}
-}
-
 function findArrayIndex(arrayId) {
 	const arrayIndex = toDoList.findIndex((item, idx, list) =>{
 		return item.id == arrayId
@@ -88,7 +96,7 @@ function findArrayIndex(arrayId) {
 	return arrayIndex
 }
 
-function removeLi(i, arrayIdx) {
+function removeLi(i, arrayId) {
 	let idx = findArrayIndex(arrayId)
 	let el = i;
 	let confirmDeletion = confirm('Are you sure you want to delete this item ? \n \n Click ok to delete.')
@@ -99,13 +107,6 @@ function removeLi(i, arrayIdx) {
 	} else {
 		return
 	}
-}
-
-function addModalHandler() {
-	addItemModule.classList.toggle('hidden');
-	toggleBackdrop();
-	userInput[0].focus()
-
 }
 
 function moveFunc(element, parent, arrayId) {
@@ -132,5 +133,6 @@ function moveFunc(element, parent, arrayId) {
 
 // Event listeners
 backDrop.addEventListener('click', closeHandler);
-addButton.addEventListener('click', function() {updateList(addItem.value)})
+AddItemButton.addEventListener('click', addModalHandler)
+addButton.addEventListener('click', function() {validateInput(addItem.value)})
 closeButton.addEventListener('click', closeHandler)
