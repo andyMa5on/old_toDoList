@@ -112,6 +112,7 @@ function removeLi(i, arrayId) {
 	let idx = findArrayIndex(arrayId)
 	let el = i;
 	let confirmDeletion = confirm('Are you sure you want to delete this item ? \n \n Click ok to delete.')
+	
 	if (confirmDeletion == true) {
 		toDoList.splice(idx, 1) ;
 		el.remove();
@@ -119,28 +120,31 @@ function removeLi(i, arrayId) {
 	} else {
 		return
 	}
+	
 }
 
-function moveFunc(element, parent, arrayId) {
+function moveFunc(element, liElement, arrayId) {
 	i = element.getAttribute('name')
-	parent = parent.parentElement.parentElement
-	if (i == 'move_down') {
+	liElement = liElement.parentElement.parentElement
+
+	if ((i == 'move_down') && (liElement.nextElementSibling !== null)) {
 		const arrayIndex = findArrayIndex(arrayId)
 		const item2Move = toDoList[arrayIndex]
 		const swapWith = toDoList[arrayIndex + 1]
 		toDoList[arrayIndex] = swapWith
 		toDoList[arrayIndex + 1] = item2Move
-		let test = parent.nextElementSibling;
-		test.insertAdjacentElement('afterend', parent);
-	} else {
+		let test = liElement.nextElementSibling;
+		test.insertAdjacentElement('afterend', liElement);
+	} else if ((i == 'move_up') && (liElement.previousElementSibling !== null)) {
 		const arrayIndex = findArrayIndex(arrayId)
 		const item2Move = toDoList[arrayIndex]
 		const swapWith = toDoList[arrayIndex - 1]
 		toDoList[arrayIndex] = swapWith
 		toDoList[arrayIndex - 1] = item2Move
-		let test = parent.previousElementSibling;
-		parent.insertAdjacentElement('afterend', test);
+		let test = liElement.previousElementSibling;
+		liElement.insertAdjacentElement('afterend', test);
 	}
+
 }
 
 // Event listeners
