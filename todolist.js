@@ -64,6 +64,8 @@ function createLiElement(id, title, descrition) {
 	</div>
 	`;
 	
+	liEl.querySelector('.titleInput').addEventListener('change', function () {titleHandler(this.value, this.previousElementSibling.value)})
+	liEl.querySelector('.areaDescrip').addEventListener('change', function () {descriptionHandler(this.value, this.parentElement.children[1].value)})
 	liEl.querySelector('.arrow_Up').addEventListener('click', function() {moveFunc(this, this.parentElement, this.nextElementSibling.value)})
 	liEl.querySelector('.arrow_Down').addEventListener('click', function() {moveFunc(this, this.parentElement, this.parentElement.children[1].value)})
 	liEl.querySelector('.binButton').addEventListener('click', function() {removeLi(this.parentElement.parentElement.parentElement, this.parentElement.previousElementSibling.children[1].value)})
@@ -77,6 +79,16 @@ function updateUI() {
 	} else {
 		entryText.style.display = 'none';
 	}
+}
+
+function titleHandler(newValue, arrayId) {
+	let idx = findArrayIndex(arrayId)
+	toDoList[idx].title = newValue
+}
+
+function descriptionHandler(newValue, arrayId) {
+	let idx = findArrayIndex(arrayId)
+	toDoList[idx].description = newValue
 }
 
 function toggleBackdrop() {
