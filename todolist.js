@@ -9,7 +9,18 @@ const userInput = document.getElementsByName('input');
 const arrowUp = document.getElementsByName('move_up');
 const ArrowDown = document.getElementsByName('move_down');
 
-const toDoList = []
+let toDoList
+
+if (localStorage.key('toDoList') !== null) {
+	toDoList = JSON.parse(localStorage.getItem('toDoList'))
+
+	toDoList.forEach(item => {
+		createLiElement(item.id, item.title, item.description)
+		updateUI()
+	});
+} else {
+	toDoList = []
+}
 
 function addModalHandler() {
 	addItemModule.classList.toggle('hidden');
@@ -25,7 +36,8 @@ function validateInput(newItem) {
 	} else {
 		addToDoListItemHandler()
 		updateUI()
-		addModalHandler(); 
+		closeHandler();
+		localStorage.setItem('toDoList', JSON.stringify(toDoList)) 
 	}
 }
 
@@ -52,8 +64,8 @@ function createLiElement(id, title, descrition) {
 	<div class='card toDoCard'>
 		<div class='central'>
 			<img src='Images//ArrowUp.png' alt='Up Arrow' name='move_up' class='arrow_Up'>
-			<input type='hidden' id='id' value=${id}>
-			<input type='text'value=${title} class='titleInput' editable>
+			<input type='hidden' id='id' value='${id}'>
+			<input type='text' value='${title}' class='titleInput' editable>
 			<br>
 			<img src='Images//ArrowDown.png' alt='Down Arrow' name='move_down' class='arrow_Down'>
 			<textarea class='areaDescrip'>${descrition}</textarea>
@@ -84,11 +96,17 @@ function updateUI() {
 function titleHandler(newValue, arrayId) {
 	let idx = findArrayIndex(arrayId)
 	toDoList[idx].title = newValue
+	refreshStorageArray();
 }
 
 function descriptionHandler(newValue, arrayId) {
 	let idx = findArrayIndex(arrayId)
 	toDoList[idx].description = newValue
+	refreshStorageArray();
+}
+
+function refreshStorageArray () {
+	localStorage.setItem('toDoList', JSON.stringify(toDoList))
 }
 
 function toggleBackdrop() {
@@ -96,7 +114,8 @@ function toggleBackdrop() {
 }
 
 function closeHandler() {
-	addModalHandler();
+	addItemModule.classList.toggle('hidden');
+	toggleBackdrop();
 	userInput[0].value = ''
 	userInput[1].value = ''
 }
@@ -117,6 +136,7 @@ function removeLi(i, arrayId) {
 		toDoList.splice(idx, 1) ;
 		el.remove();
 		updateUI();
+		refreshStorageArray();
 	} else {
 		return
 	}
@@ -135,6 +155,7 @@ function moveFunc(element, liElement, arrayId) {
 		toDoList[arrayIndex + 1] = item2Move
 		let test = liElement.nextElementSibling;
 		test.insertAdjacentElement('afterend', liElement);
+		refreshStorageArray();
 	} else if ((i == 'move_up') && (liElement.previousElementSibling !== null)) {
 		const arrayIndex = findArrayIndex(arrayId)
 		const item2Move = toDoList[arrayIndex]
@@ -143,6 +164,7 @@ function moveFunc(element, liElement, arrayId) {
 		toDoList[arrayIndex - 1] = item2Move
 		let test = liElement.previousElementSibling;
 		liElement.insertAdjacentElement('afterend', test);
+		refreshStorageArray();
 	}
 
 }
