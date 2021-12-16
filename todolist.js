@@ -1,13 +1,11 @@
 // Javascript
 const backDrop = document.getElementById('backdrop');
 const addItemModule = document.getElementById('addItemModule')
-const AddItemButton = document.getElementById('addIcon')
+const addItemButton = document.getElementById('addIcon')
 const addButton = document.getElementById('addBttn');
 const closeButton = document.getElementById('closeBttn')
 const ulElement = document.getElementById('userInterface');
 const userInput = document.getElementsByName('input');
-const arrowUp = document.getElementsByName('move_up');
-const ArrowDown = document.getElementsByName('move_down');
 
 let toDoList
 
@@ -171,6 +169,6 @@ function moveFunc(element, liElement, arrayId) {
 
 // Event listeners
 backDrop.addEventListener('click', closeHandler);
-AddItemButton.addEventListener('click', addModalHandler)
+addItemButton.addEventListener('click', addModalHandler)
 addButton.addEventListener('click', function() {validateInput(addItem.value)})
 closeButton.addEventListener('click', closeHandler)
