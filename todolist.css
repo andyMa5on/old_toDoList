@@ -1,5 +1,10 @@
 @charset "utf-8";
 /* CSS Document */
+
+* {
+    box-sizing: border-box;
+}
+
 html{
     font-family: sans-serif;
 }
@@ -58,9 +63,12 @@ body {
     z-index: 100;
     background: white;
     border-radius: 10px;
-    width: 30%;
+	width: auto;
+	height: auto;
+    max-width: 50%;
     top: 30vh;
-    right: 33%;
+    right: 25%;
+	left: 25%;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
 }
 
@@ -130,7 +138,7 @@ body {
 }
 
 .toDoCard {
-	width: 40rem;
+	width: 50%;
 	max-width: 80%;
 	margin: 1rem auto;
 	padding: 0.8rem;
@@ -141,6 +149,7 @@ body {
 	display: flex;
 	justify-content: flex-end;
 }
+
 Label {
 	font: small-caps;
     font-weight: bold;
@@ -186,9 +195,7 @@ li {
 }
 
 .areaDescrip {
-	width: 578px;
-	min-width: 578px;
-	max-width: 578px; 
+	width: 90%; 
 	height: 75px;
 	min-height: 75px;
 	max-height: 75px;
