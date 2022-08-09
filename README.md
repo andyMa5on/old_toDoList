@@ -12,7 +12,7 @@ Infront of the Title on each task are two arrow buttons. These buttons allow you
 
 ## ***Using the todolist***
 
-### Creating a task
+## Creating a task
 When you open the `todolist` page, if there are no tasks currently avaliable you will see a message on the screen saying "Your personal TO DO List!". You can add your first take by using the add `button` in the nav bar. Once you have clicked on this button a simple modal will appear where you can entry the information about your task (Title, Description) and two `buttons` (Cancel, Add).
 
 If you fail to provide a title before clicking the add `button` an error message will appear prompting you to add one.
