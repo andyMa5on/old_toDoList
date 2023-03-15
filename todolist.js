@@ -9,13 +9,14 @@ const userInput = document.getElementsByName('input');
 
 let toDoList;
 
-if (localStorage.key('toDoList') !== null) {
+if (localStorage.getItem('toDoList') != null) {
 	toDoList = JSON.parse(localStorage.getItem('toDoList'));
 
-	toDoList.forEach((item) => {
-		createLiElement(item.id, item.title, item.description);
-		updateUI();
-	});
+    toDoList.forEach((item) => {
+        createLiElement(item.id, item.title, item.description);
+        updateUI();
+    });
+	
 } else {
 	toDoList = [];
 }
